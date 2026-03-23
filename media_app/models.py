@@ -6,3 +6,10 @@ class MediaUpload(models.Model):
 
     def __str__(self):
         return self.file.name
+    
+class LogoUpload(models.Model):
+    file = models.FileField(upload_to='logos/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.file.name
