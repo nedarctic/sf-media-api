@@ -3,12 +3,19 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import MediaUpload, LogoUpload
 from .serializers import MediaUploadSerializer, LogoUploadSerializer
+from rest_framework.permissions import IsAuthenticated
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from .models import MediaUpload
 
 class MediaUploadView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request):
         serializer = MediaUploadSerializer(
             data=request.data,
-            context={"request": request}  # ✅ add this
+            context={"request": request}
         )
 
         if serializer.is_valid():
@@ -19,6 +26,8 @@ class MediaUploadView(APIView):
 
 
 class MediaListView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         media = MediaUpload.objects.all()
         serializer = MediaUploadSerializer(
@@ -27,17 +36,9 @@ class MediaListView(APIView):
             context={"request": request}
         )
         return Response(serializer.data)
-    
-from django.http import FileResponse
-from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny  # or IsAuthenticated if you want to protect
-from .models import MediaUpload
-
 
 class MediaDownloadView(APIView):
-    permission_classes = [AllowAny]  # change to authenticated if needed
-    
+    permission_classes = [IsAuthenticated]    
 
     def get(self, request, pk: int):
         media = get_object_or_404(MediaUpload, pk=pk)
@@ -54,6 +55,8 @@ class MediaDownloadView(APIView):
         return response
     
 class LogoUploadView(APIView):
+    # permission_classes = [IsAuthenticated]
+    
     def post(self, request):
         serializer = LogoUploadSerializer(
             data=request.data,
@@ -65,6 +68,8 @@ class LogoUploadView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class LogoListView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request):
         logos = LogoUpload.objects.all()
         serializer = LogoUploadSerializer(
@@ -75,6 +80,8 @@ class LogoListView(APIView):
         return Response(serializer.data)
     
 class LogoDownloadView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request, pk: int):
         logo = get_object_or_404(LogoUpload, pk=pk)
         file_path = logo.file.path
