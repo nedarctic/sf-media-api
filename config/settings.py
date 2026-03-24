@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wu-sg6k0nf_$%w&frf4-ulh)k&8y)%85+&@$4cxe%#6wcj!xcv'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -140,6 +140,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://semafacts.com",
     "https://semafacts.justuskimtai.com",
     "https://justuskimtai.com",
+    "https://smf-kmhtpfo9w-justus-kimtais-projects.vercel.app/",
+    "https://smf-9w0ql0dqh-justus-kimtais-projects.vercel.app/",
+    "https://smf-one.vercel.app/",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
