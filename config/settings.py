@@ -140,9 +140,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://semafacts.com",
     "https://semafacts.justuskimtai.com",
     "https://justuskimtai.com",
-    "https://smf-kmhtpfo9w-justus-kimtais-projects.vercel.app/",
-    "https://smf-9w0ql0dqh-justus-kimtais-projects.vercel.app/",
-    "https://smf-one.vercel.app/",
+    "https://smf-kmhtpfo9w-justus-kimtais-projects.vercel.app",
+    "https://smf-9w0ql0dqh-justus-kimtais-projects.vercel.app",
+    "https://smf-one.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
